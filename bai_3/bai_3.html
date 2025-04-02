@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="ma" placeholder="nhập mã sổ " type="text">
+<input id="loaiSo" placeholder="nhập loại sổ " type="text">
+<input id="hoTen" placeholder="nhập họ tên " type="text">
+<input id="chungMinh" placeholder="nhập chứng minh " type="number">
+<input id="ngayMo" placeholder="ngày mở sổ " type="date">
+<input id="tienGui" placeholder="nhập số tiền gửi " type="number">
+<button onclick="themSoMoi()">Thêm</button>
+<br><br>
+<div id="bang"></div>
+<script>
+    class SoTiecKiem {
+        constructor(maSo, loaiTiecKiem, hoTen, chungMinh, ngayMo, tienGui) {
+            this.maSo = maSo;
+            this.loaiTiecKiem = loaiTiecKiem;
+            this.hoTen = hoTen;
+            this.chungMinh = chungMinh;
+            this.ngayMo = ngayMo;
+            this.tienGui = tienGui;
+        }
+    }
+
+    let p1 = new SoTiecKiem("1312", "theo tháng", "Lê Văn A", 1234, "23/1/2025", 200 + "$")
+    let mangBanDau = [p1];
+    display(mangBanDau, "bang");
+
+    function display(list) {
+        let bangChuoi = `<table border="1" style="border-collapse: collapse">
+                  <tr>
+                    <th>STT</th>
+                    <th>Mã sản sổ</th>
+                    <th>loại thiếc kiệm</th>
+                    <th>họ tên khách hàng</th>
+                    <th>chứng minh nhân dân</th>
+                    <th>ngày mở sổ</th>
+                    <th>số tiền gửi</th>
+                    <th>Chức năng</th>
+                  </tr>`;
+        for (let i = 0; i < list.length; i++) {
+            bangChuoi += `<tr>
+                      <td>${i + 1}</td>
+                     <td>${list[i].maSo}</td>
+                     <td>${list[i].loaiTiecKiem}</td>
+                     <td>${list[i].hoTen}</td>
+                     <td>${list[i].chungMinh}</td>
+                     <td>${list[i].ngayMo}</td>
+                     <td>${list[i].tienGui}</td>
+                     <td><button onclick="xoaSo(${i})">Xóa</button></td>
+                 </tr>`
+        }
+        document.getElementById("bang").innerHTML = bangChuoi;
+    }
+
+    function themSoMoi() {
+        let ma = document.getElementById("ma").value;
+        let loai = document.getElementById("loaiSo").value;
+        let ten = document.getElementById("hoTen").value;
+        let chungMinh = document.getElementById("chungMinh").value;
+        let ngayMo = document.getElementById("ngayMo").value;
+        let tienGui = document.getElementById("tienGui").value;
+        if (ma === "" || loai === "" || ten === ""|| chungMinh === ""|| ngayMo === ""|| tienGui === "") {
+            alert("Vui lòng nhập đầy đủ thông tin ");
+            return;
+        }
+        let soMoi = new SoTiecKiem(ma, loai, ten, chungMinh, ngayMo, tienGui);
+        mangBanDau.push(soMoi);
+        display(mangBanDau);
+        document.getElementById("ma").value = "";
+        document.getElementById("loaiSo").value = "";
+        document.getElementById("hoTen").value = "";
+        document.getElementById("chungMinh").value = "";
+        document.getElementById("ngayMo").value = "";
+        document.getElementById("tienGui").value = "";
+    }
+
+    function xoaSo(index) {
+        let conf = confirm("bạn có muốn xóa sản phẩm không ?")
+        if (conf) {
+            mangBanDau.splice(index, 1);
+        }
+        display(mangBanDau);
+    }
+</script>
+</body>
+</html>

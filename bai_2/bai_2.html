@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let phanSo1 = prompt("nhập phân số thứ nhất").split("/");
+    let phanSo2 = prompt("nhập phân số thứ hai").split('/');
+
+
+    function soSanhHaiPhanSo(tu1, mau1, tu2, mau2) {
+        if (tu1 * mau2 === tu2 * mau1) {
+            return true;
+        }
+        return false;
+    }
+    alert(soSanhHaiPhanSo(phanSo1[0], phanSo1[1], phanSo2[0], phanSo2[1]));
+</script>
+</body>
+</html>
